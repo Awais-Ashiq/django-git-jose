@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>DjangoProject</title>
+    <link rel="stylesheet" href="{% static 'style/style.css' %}">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+  </head>
+  <body>
+    <div class="container-fliud">
+      <nav class="navbar navbar-expand-lg navbar-light bg-light">
+          <div class="container">
+            <a class="navbar-brand" href="#">Django home</a>
+            <ul class="navbar-nav mr-auto">
+              <li class="nav-item"><a class="nav-link" href="{% url 'index' %}">Home <span class="sr-only">(current)</span></a></li>
+              <li class="nav-item"><a href="{% url 'contact' %}" class="nav-link">Contact</a></li>
+              <li class="nav-item"><a href="{% url 'final_app:user' %}" class="nav-link">Register</a></li>
+              <li class="nav-item"><a href="{% url 'admin:index' %}" target='_blank' class="nav-link">Admin</a></li>
+              {% if user.is_authenticated %}
+              <li class="nav-item mr-left"><a href="{% url 'final_app:logout' %}" class="nav-link">LogOut</a>
+
+              {% else %}
+
+              <li class="nav-item mr-auto"><a href="{% url 'final_app:user_login' %}" class="nav-link">LogIn</a></li>
+
+              {% endif %}
+            </ul>
+            {% if user.is_authenticated %}
+            <ul class="navbar-nav mr-0">
+              <li class="nav-item my-2"><img class="img-resposive" src='{{ user.profile_pic }}' alt='User Photo'></li>
+              <li class="nav-item my-2"><a href='#' class="nav-link">{{user.username}}</a></li>
+
+            </ul>
+            {% endif %}
+         </div>
+      </nav>
+    </div>
+    <div class="container block">
+      {% block content %}
+      {% endblock %}
+    </div>
+
+  </body>
+</html>

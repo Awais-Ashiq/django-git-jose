@@ -1,0 +1,15 @@
+{% extends 'final_app/base.html' %}
+
+{% block content %}
+{% if registerd %}
+    <h2>Thanks for Registring!</h2>
+{% else %}
+    <h2>Register Here!</h2>
+    <form class="forms" enctype='multipart/form-data' method="post">
+      {{ user_form.as_p }}
+      {{ profile_form.as_p }}
+      {% csrf_token %}
+      <input type="submit" class="btn btn-primary" name="" value="Register">
+    </form>
+{% endif %}
+{% endblock %}
